@@ -3,6 +3,8 @@
  * Handles hit detection, damage calculation, and combat mechanics
  */
 
+import * as THREE from 'three';
+
 export class CombatSystem {
   constructor(game) {
     this.game = game;

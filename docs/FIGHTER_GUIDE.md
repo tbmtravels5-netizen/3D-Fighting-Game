@@ -62,7 +62,7 @@
 
 ---
 
-### 🌑 Shadow - Speed Specialist
+### 🌙 Shadow - Speed Specialist
 **Playstyle**: Quick combos, evasive, high risk/high reward
 
 - Health: 85
