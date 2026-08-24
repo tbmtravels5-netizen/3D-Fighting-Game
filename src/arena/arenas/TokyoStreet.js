@@ -1,5 +1,5 @@
 /**
- * Tokyo Street - Urban Arena
+ * Tokyo Street Arena
  */
 
 import { Arena } from '../Arena.js';
@@ -19,9 +19,6 @@ export class TokyoStreet extends Arena {
     });
   }
 
-  /**
-   * Create Tokyo-specific environment
-   */
   createEnvironment() {
     // Neon signs
     const neonGeometry = new THREE.BoxGeometry(5, 3, 0.5);
@@ -33,7 +30,7 @@ export class TokyoStreet extends Arena {
     neonSign.position.set(12, 5, -20);
     this.group.add(neonSign);
 
-    // Skyscrapers (background)
+    // Skyscrapers
     const buildingGeometry = new THREE.BoxGeometry(8, 40, 6);
     const buildingMaterial = new THREE.MeshStandardMaterial({
       color: 0x222222,

@@ -1,5 +1,5 @@
 /**
- * AI System - Opponent AI for all difficulty levels
+ * AI System
  */
 
 import * as THREE from 'three';
@@ -9,19 +9,12 @@ export class AISystem {
     this.fighter = fighter;
     this.difficulty = difficulty;
     this.target = null;
-
-    // Difficulty settings
     this.settings = this.getDifficultySettings(difficulty);
-
-    // AI state
     this.decisionTimer = 0;
     this.lastAction = null;
     this.actionCooldown = 0;
   }
 
-  /**
-   * Get settings based on difficulty
-   */
   getDifficultySettings(difficulty) {
     const settings = {
       Easy: {
@@ -57,16 +50,11 @@ export class AISystem {
         accuracy: 0.95,
       },
     };
-
     return settings[difficulty] || settings.Normal;
   }
 
-  /**
-   * Update AI decision making
-   */
   update(deltaTime, targetFighter) {
     this.target = targetFighter;
-
     this.decisionTimer += deltaTime * 1000;
     this.actionCooldown -= deltaTime * 1000;
 
@@ -76,9 +64,6 @@ export class AISystem {
     }
   }
 
-  /**
-   * Make decision on what to do
-   */
   makeDecision() {
     if (!this.target || this.actionCooldown > 0) return;
 
@@ -86,7 +71,6 @@ export class AISystem {
     const healthPercent = this.fighter.health / this.fighter.maxHealth;
     const rand = Math.random();
 
-    // Defensive when low health
     if (healthPercent < 0.3) {
       if (rand < this.settings.blockChance) {
         this.fighter.block(true);
@@ -95,9 +79,7 @@ export class AISystem {
       }
     }
 
-    // Attacking
     if (rand < this.settings.specialChance && distance < 4) {
-      // Use special move
       if (this.fighter.specialMove) {
         this.fighter.specialMove();
         this.actionCooldown = 1000;
@@ -106,10 +88,8 @@ export class AISystem {
     }
 
     if (rand < this.settings.attackChance && distance < 3) {
-      // Regular attack
       const isHeavy = Math.random() > 0.5;
       const isKick = Math.random() > 0.5;
-
       if (isKick) {
         this.fighter.kick(isHeavy);
       } else {
@@ -119,15 +99,12 @@ export class AISystem {
       return;
     }
 
-    // Movement - approach or retreat
     if (distance > 5) {
-      // Approach
       const direction = new THREE.Vector3()
         .subVectors(this.target.position, this.fighter.position)
         .normalize();
       this.fighter.direction.copy(direction);
     } else if (distance < 2) {
-      // Retreat
       const direction = new THREE.Vector3()
         .subVectors(this.fighter.position, this.target.position)
         .normalize();

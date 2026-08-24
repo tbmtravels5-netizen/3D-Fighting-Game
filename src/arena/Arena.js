@@ -1,6 +1,5 @@
 /**
  * Arena Base Class
- * Foundation for all arena types
  */
 
 import * as THREE from 'three';
@@ -13,14 +12,12 @@ export class Arena {
     this.length = config.length || 50;
     this.group = new THREE.Group();
 
-    // Environment
     this.ambientLight = null;
     this.directionalLight = null;
     this.ground = null;
     this.walls = [];
     this.hazards = [];
 
-    // Settings
     this.groundMaterial = config.groundMaterial || new THREE.MeshStandardMaterial({
       color: 0x333333,
       roughness: 0.8,
@@ -28,9 +25,6 @@ export class Arena {
     });
   }
 
-  /**
-   * Initialize arena scene
-   */
   create() {
     this.createGround();
     this.createWalls();
@@ -39,9 +33,6 @@ export class Arena {
     return this.group;
   }
 
-  /**
-   * Create ground plane
-   */
   createGround() {
     const groundGeometry = new THREE.PlaneGeometry(this.width, this.length);
     this.ground = new THREE.Mesh(groundGeometry, this.groundMaterial);
@@ -50,9 +41,6 @@ export class Arena {
     this.group.add(this.ground);
   }
 
-  /**
-   * Create boundary walls
-   */
   createWalls() {
     const wallHeight = 5;
     const wallThickness = 0.5;
@@ -62,7 +50,6 @@ export class Arena {
       metalness: 0,
     });
 
-    // Front wall
     const frontWall = new THREE.Mesh(
       new THREE.BoxGeometry(this.width, wallHeight, wallThickness),
       wallMaterial
@@ -72,7 +59,6 @@ export class Arena {
     this.walls.push(frontWall);
     this.group.add(frontWall);
 
-    // Back wall
     const backWall = new THREE.Mesh(
       new THREE.BoxGeometry(this.width, wallHeight, wallThickness),
       wallMaterial
@@ -83,18 +69,14 @@ export class Arena {
     this.group.add(backWall);
   }
 
-  /**
-   * Create arena lighting
-   */
   createLighting() {
-    // Ambient light
     this.ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
     this.group.add(this.ambientLight);
 
-    // Directional light (sun)
     this.directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
     this.directionalLight.position.set(20, 30, 20);
     this.directionalLight.castShadow = true;
+    this.directionalLight.shadow.mapSize.set(2048, 2048);
     this.directionalLight.shadow.camera.left = -40;
     this.directionalLight.shadow.camera.right = 40;
     this.directionalLight.shadow.camera.top = 40;
@@ -102,17 +84,11 @@ export class Arena {
     this.group.add(this.directionalLight);
   }
 
-  /**
-   * Override in subclasses for arena-specific effects
-   */
   createEnvironment() {
-    // To be overridden by subclasses
+    // Override in subclasses
   }
 
-  /**
-   * Update arena effects
-   */
   update(deltaTime) {
-    // Update hazards, animations, etc.
+    // Update arena effects
   }
 }

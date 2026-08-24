@@ -1,5 +1,5 @@
 /**
- * Underground Arena - Neutral Ground
+ * Underground Arena
  */
 
 import { Arena } from '../Arena.js';
@@ -19,11 +19,7 @@ export class UndergroundArena extends Arena {
     });
   }
 
-  /**
-   * Create underground environment
-   */
   createEnvironment() {
-    // Stone columns
     const columnGeometry = new THREE.CylinderGeometry(1, 1.2, 15, 8);
     const columnMaterial = new THREE.MeshStandardMaterial({
       color: 0x555555,
@@ -38,7 +34,6 @@ export class UndergroundArena extends Arena {
       this.group.add(column);
     }
 
-    // Ceiling
     const ceilingGeometry = new THREE.PlaneGeometry(this.width, this.length);
     const ceilingMaterial = new THREE.MeshStandardMaterial({
       color: 0x2a2a2a,

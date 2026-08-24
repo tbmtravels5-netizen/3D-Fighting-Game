@@ -1,5 +1,5 @@
 /**
- * Input Manager - Handles all player input
+ * Input Manager
  */
 
 import * as THREE from 'three';
@@ -10,16 +10,11 @@ export class InputManager {
     this.keys = {};
     this.mouse = { x: 0, y: 0, clicked: false };
     this.touches = [];
-
     this.setupKeyboardListeners();
     this.setupMouseListeners();
     this.setupTouchListeners();
-    this.setupGamepadListeners();
   }
 
-  /**
-   * Setup keyboard event listeners
-   */
   setupKeyboardListeners() {
     window.addEventListener('keydown', (e) => {
       this.keys[e.key.toLowerCase()] = true;
@@ -31,12 +26,8 @@ export class InputManager {
     });
   }
 
-  /**
-   * Handle keyboard down events
-   */
   handleKeyDown(e) {
     const key = e.key.toLowerCase();
-
     if (!this.game.players[0]) return;
 
     const player = this.game.players[0];
@@ -44,36 +35,32 @@ export class InputManager {
     switch (key) {
       case '1':
       case 'x':
-        player.punch(false); // Light punch
+        player.punch(false);
         break;
       case '2':
       case 'c':
-        player.kick(false); // Light kick
+        player.kick(false);
         break;
       case '3':
-        player.punch(true); // Heavy punch
+        player.punch(true);
         break;
       case '4':
-        player.kick(true); // Heavy kick
+        player.kick(true);
         break;
       case '5':
       case 'z':
-        player.specialMove(); // Special move
+        if (player.specialMove) player.specialMove();
         break;
       case '6':
       case 'v':
-        player.ultimateMove(); // Ultimate
+        if (player.ultimateMove) player.ultimateMove();
         break;
       case '7':
       case 'shift':
-        player.block(true); // Block
-        break;
-      case '8':
-      case 'q':
-        player.grab(); // Grab
+        player.block(true);
         break;
       case ' ':
-        player.jump(); // Jump
+        player.jump();
         break;
       case 'p':
       case 'escape':
@@ -82,9 +69,6 @@ export class InputManager {
     }
   }
 
-  /**
-   * Setup mouse listeners
-   */
   setupMouseListeners() {
     window.addEventListener('mousemove', (e) => {
       this.mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
@@ -100,9 +84,6 @@ export class InputManager {
     });
   }
 
-  /**
-   * Setup touch listeners for mobile
-   */
   setupTouchListeners() {
     window.addEventListener('touchstart', (e) => {
       this.touches = e.touches;
@@ -117,18 +98,6 @@ export class InputManager {
     });
   }
 
-  /**
-   * Setup gamepad listeners
-   */
-  setupGamepadListeners() {
-    window.addEventListener('gamepadconnected', (e) => {
-      console.log('Gamepad connected:', e.gamepad.id);
-    });
-  }
-
-  /**
-   * Get movement direction from keyboard
-   */
   getMovementDirection() {
     const direction = new THREE.Vector3();
 
@@ -144,9 +113,6 @@ export class InputManager {
     return direction;
   }
 
-  /**
-   * Check if specific key is pressed
-   */
   isKeyPressed(key) {
     return this.keys[key.toLowerCase()] || false;
   }
