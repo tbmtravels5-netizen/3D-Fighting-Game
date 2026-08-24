@@ -114,11 +114,11 @@ src/
 
 public/
 ├── index.html                # HTML entry point
-├── assets/
-│   ├── models/               # 3D models
-│   ├── textures/             # Textures
-│   ├── animations/           # Animation files
-│   └── audio/                # Sound files
+└── assets/
+    ├── models/               # 3D models
+    ├── textures/             # Textures
+    ├── animations/           # Animation files
+    └── audio/                # Sound files
 ```
 
 ## Development Workflow

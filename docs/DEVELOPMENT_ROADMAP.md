@@ -401,9 +401,9 @@ Week 3-4:  Core Combat (6 Fighters, Combos, Specials, AI)
 Week 5-6:  Polish (VFX, Audio, 5 Arenas, Optimization)
 Week 7-8:  Content (Story Mode, Progression, Achievements)
 
-═══════════════════════════════════════════════════════
+════════════════════════════════════════════════════════════════════════════════
 Total: 8 Weeks (56 Days) = ~420 Development Hours
-═══════════════════════════════════════════════════════
+════════════════════════════════════════════════════════════════════════════════
 
 Target Launch: 8 weeks from start
 Beta Testing: Week 8
